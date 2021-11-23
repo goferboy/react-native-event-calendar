@@ -1,3 +1,6 @@
+# Forked by goferboy
+testing this out as a submodule for a project
+
 # React Native Event Calendar
 A React Native iOS style calendar implemented using VirtualizedList.
 This package now incorporates the work of https://github.com/duyluonglc/
