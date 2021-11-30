@@ -33,11 +33,14 @@ export default class DayView extends React.PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const width = nextProps.width - LEFT_MARGIN;
-    this.setState({
-      packedEvents: populateEvents(nextProps.events, width, nextProps.start),
-    });
+  static getDerivedStateFromProps(props, state) {
+    const width = props.width - LEFT_MARGIN;
+    if (props.events !== state.packedEvents) {
+      return {
+        packedEvents: populateEvents(props.events, width, props.start)
+      }
+    }
+    return null;
   }
 
   componentDidMount() {
