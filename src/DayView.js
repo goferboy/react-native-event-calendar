@@ -49,10 +49,12 @@ export default class DayView extends React.PureComponent {
     this.props.scrollToFirst && this.scrollToFirst();
   }
 
-  componentDidUpdate() {
-    this.props.scrollToFirst && this.scrollToFirst();
-    this.props.styles.contentStyle.height = (this.props.end - this.props.start) * 100;
+  componentDidUpdate(prevProps) {
+    if (!this.props.modalVisibleForDayView && prevProps.modalVisibleForDayView === this.props.modalVisibleForDayView)
+      this.props.scrollToFirst && this.scrollToFirst();
   }
+
+
 
   scrollToFirst() {
     setTimeout(() => {
