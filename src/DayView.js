@@ -1,5 +1,5 @@
 // @flow
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import populateEvents from './Packer';
 import React from 'react';
 import moment from 'moment';
@@ -199,6 +199,7 @@ export default class DayView extends React.PureComponent {
     const { styles } = this.props;
     return (
       <ScrollView
+        refreshControl={<RefreshControl refreshing={this.props.refreshingForDayView} onRefresh={this.props.onRefreshForDayView} />}
         ref={ref => (this._scrollView = ref)}
         contentContainerStyle={[
           styles.contentStyle,
