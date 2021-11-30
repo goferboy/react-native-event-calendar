@@ -30,14 +30,19 @@ export default class DayView extends React.PureComponent {
     this.state = {
       _scrollY: initPosition,
       packedEvents,
+      calendarHeight: this.calendarHeight
     };
   }
 
   static getDerivedStateFromProps(props, state) {
     const width = props.width - LEFT_MARGIN;
     if (props.events !== state.packedEvents) {
+      // const initPosition = _.min(_.map(props.events, 'top')) -
+      // this.calendarHeight / (props.end - props.start);
       return {
-        packedEvents: populateEvents(props.events, width, props.start)
+        packedEvents: populateEvents(props.events, width, props.start),
+        // _scrollY: initPosition,
+        calendarHeight: (props.end - props.start) * 100
       }
     }
     return null;
@@ -83,7 +88,7 @@ export default class DayView extends React.PureComponent {
 
   _renderLines() {
     const { format24h, start, end } = this.props;
-    const offset = this.calendarHeight / (end - start);
+    const offset = this.state.calendarHeight / (end - start);
 
     return range(start, end + 1).map((i, index) => {
       let timeText;
@@ -125,7 +130,7 @@ export default class DayView extends React.PureComponent {
 
   _renderTimeLabels() {
     const { styles, start, end } = this.props;
-    const offset = this.calendarHeight / (end - start);
+    const offset = this.state.calendarHeight / (end - start);
     return range(start, end).map((item, i) => {
       return (
         <View key={`line${i}`} style={[styles.line, { top: offset * i }]} />
