@@ -35,7 +35,6 @@ export default class DayView extends React.PureComponent {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log(props.start, props.end)
     const width = props.width - LEFT_MARGIN;
     if (props.events !== state.packedEvents) {
       return {
@@ -52,6 +51,7 @@ export default class DayView extends React.PureComponent {
 
   componentDidUpdate() {
     this.props.scrollToFirst && this.scrollToFirst();
+    this.props.styles.contentStyle.height = (this.props.end - this.props.start) * 100;
   }
 
   scrollToFirst() {
@@ -217,6 +217,7 @@ export default class DayView extends React.PureComponent {
         ref={ref => (this._scrollView = ref)}
         contentContainerStyle={[
           styles.contentStyle,
+          { height: ((this.props.end - this.props.start) * 100) + 10},
           { width: this.props.width },
         ]}
       >

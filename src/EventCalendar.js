@@ -20,7 +20,6 @@ export default class EventCalendar extends React.Component {
 
     const start = props.start ? props.start : 0;
     const end = props.end ? props.end : 24;
-
     this.styles = styleConstructor(props.styles, (end - start) * 100);
     this.state = {
       date: moment(this.props.initDate),
@@ -38,6 +37,10 @@ export default class EventCalendar extends React.Component {
     if (this.props.onRef) {
       this.props.onRef(undefined);
     }
+  }
+
+  componentDidUpdate() {
+    this.styles.contentStyle.height = (this.props.end - this.props.start) * 100;
   }
 
   static defaultProps = {
