@@ -35,13 +35,11 @@ export default class DayView extends React.PureComponent {
   }
 
   static getDerivedStateFromProps(props, state) {
+    console.log(props.start, props.end)
     const width = props.width - LEFT_MARGIN;
     if (props.events !== state.packedEvents) {
-      // const initPosition = _.min(_.map(props.events, 'top')) -
-      // this.calendarHeight / (props.end - props.start);
       return {
         packedEvents: populateEvents(props.events, width, props.start),
-        // _scrollY: initPosition,
         calendarHeight: (props.end - props.start) * 100
       }
     }
@@ -49,6 +47,10 @@ export default class DayView extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.props.scrollToFirst && this.scrollToFirst();
+  }
+
+  componentDidUpdate() {
     this.props.scrollToFirst && this.scrollToFirst();
   }
 
@@ -207,7 +209,11 @@ export default class DayView extends React.PureComponent {
     const { styles } = this.props;
     return (
       <ScrollView
-        refreshControl={<RefreshControl refreshing={this.props.refreshingForDayView} onRefresh={this.props.onRefreshForDayView} />}
+        refreshControl={
+          <RefreshControl 
+            refreshing={this.props.refreshingForDayView} 
+            onRefresh={this.props.onRefreshForDayView} 
+        />}
         ref={ref => (this._scrollView = ref)}
         contentContainerStyle={[
           styles.contentStyle,
