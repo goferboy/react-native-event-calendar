@@ -50,7 +50,12 @@ export default class DayView extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.modalVisibleForDayView && prevProps.modalVisibleForDayView === this.props.modalVisibleForDayView)
+    // console.log(this.props.dialogVisibleForDayView)
+    // if ((!this.props.modalVisibleForDayView && prevProps.modalVisibleForDayView === this.props.modalVisibleForDayView) &&
+    //     (!this.props.dialogVisibleForDayView))
+    console.log("prevProps ", prevProps.events.length)
+    console.log("this.state ", this.state.packedEvents.length)
+    if (prevProps.events.length !== this.state.packedEvents.length)
       this.props.scrollToFirst && this.scrollToFirst();
   }
 
