@@ -98,7 +98,7 @@ export default class EventCalendar extends React.Component {
 
     return (
       <View style={[this.styles.container, { width }]}>
-        <View style={this.styles.header}>
+        <View style={[this.styles.header, this.props.headerStyle]}>
           <TouchableOpacity
               style={this.styles.arrowButton}
               onPress={this._previous}
@@ -106,7 +106,7 @@ export default class EventCalendar extends React.Component {
             {leftIcon}
           </TouchableOpacity>
           <View style={this.styles.headerTextContainer}>
-            <Text style={this.styles.headerText}>{headerText}</Text>
+            <Text style={[this.styles.headerText, this.props.headerStyle.headerText]}>{headerText}</Text>
           </View>
           <TouchableOpacity
               style={this.styles.arrowButton}
@@ -116,6 +116,7 @@ export default class EventCalendar extends React.Component {
           </TouchableOpacity>
         </View>
         <DayView
+          colorProps={this.props.colorProps}
           date={date}
           index={index}
           format24h={format24h}

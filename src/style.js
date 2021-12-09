@@ -49,7 +49,7 @@ export default function styleConstructor(theme = {}, calendarHeight) {
     event: {
       position: 'absolute',
       backgroundColor: '#F0F4FF',
-      opacity: 0.8,
+      opacity: 0.95,
       borderColor: '#DDE5FD',
       borderWidth: 1,
       borderRadius: 5,
@@ -87,14 +87,14 @@ export default function styleConstructor(theme = {}, calendarHeight) {
       height: 1,
       position: 'absolute',
       left: leftMargin,
-      backgroundColor: 'rgb(216,216,216)',
+      backgroundColor: 'rgb(170,170,170)',
       ...theme.line,
     },
     lineNow: {
-      height: 1,
+      height: 3,
       position: 'absolute',
       left: leftMargin,
-      backgroundColor: 'red',
+      backgroundColor: '#7DD1FF',
       ...theme.lineNow,
     },
     timeLabel: {

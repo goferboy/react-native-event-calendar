@@ -171,7 +171,7 @@ export default class DayView extends React.PureComponent {
           onPress={() =>
             this._onEventTapped(this.props.events[event.index])
           }
-          key={i} style={[styles.event, style, event.color && eventColor]}
+          key={i} style={[styles.event, style, event.color && eventColor, this.props.headerStyle.event]}
         >
           {this.props.renderEvent ? (
             this.props.renderEvent(event)
@@ -219,6 +219,7 @@ export default class DayView extends React.PureComponent {
         ref={ref => (this._scrollView = ref)}
         contentContainerStyle={[
           styles.contentStyle,
+          { backgroundColor: this.props.colorProps.backgroundColor},
           { height: ((this.props.end - this.props.start) * 100) + 10},
           { width: this.props.width },
         ]}
