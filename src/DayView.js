@@ -177,19 +177,19 @@ export default class DayView extends React.PureComponent {
             this.props.renderEvent(event)
           ) : (
             <View>
-              <Text numberOfLines={1} style={styles.eventTitle}>
+              <Text numberOfLines={1} style={[styles.eventTitle, {color: this.props.colorProps.text}]}>
                 {event.title || 'Event'}
               </Text>
               {numberOfLines > 1 ? (
                 <Text
                   numberOfLines={numberOfLines - 1}
-                  style={[styles.eventSummary]}
+                  style={[styles.eventSummary, {color: this.props.colorProps.text}]}
                 >
                   {event.summary || ' '}
                 </Text>
               ) : null}
               {numberOfLines > 2 ? (
-                <Text style={styles.eventTimes} numberOfLines={1}>
+                <Text style={[styles.eventTimes, {color: this.props.colorProps.text}]} numberOfLines={1}>
                   {moment(event.start).format(formatTime)} -{' '}
                   {moment(event.end).format(formatTime)}
                 </Text>
