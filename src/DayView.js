@@ -206,7 +206,6 @@ export default class DayView extends React.PureComponent {
     );
   }
   render() {
-    console.log(this.props.noEventsRender)
     const { styles } = this.props;
     return (
       <ScrollView style={{backgroundColor: this.props.colorProps.backgroundColor}}
