@@ -132,6 +132,7 @@ export default class EventCalendar extends React.Component {
           end={end}
           refreshingForDayView={this.props.refreshingForDayView}
           onRefreshForDayView={this.props.onRefreshForDayView}
+          noEventsRender={this.props.noEventsRender}
         />
       </View>
     );

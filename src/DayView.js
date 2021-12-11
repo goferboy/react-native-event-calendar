@@ -141,7 +141,7 @@ export default class DayView extends React.PureComponent {
       );
     });
   }
-
+  
   _onEventTapped(event) {
     this.props.eventTapped(event);
   }
@@ -160,30 +160,30 @@ export default class DayView extends React.PureComponent {
       const eventColor = {
         backgroundColor: event.color,
       };
-
+      
       // Fixing the number of lines for the event title makes this calculation easier.
       // However it would make sense to overflow the title to a new line if needed
       const numberOfLines = Math.floor(event.height / TEXT_LINE_HEIGHT);
       const formatTime = this.props.format24h ? 'HH:mm' : 'hh:mm A';
       return (
         <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() =>
-            this._onEventTapped(this.props.events[event.index])
+        activeOpacity={0.5}
+        onPress={() =>
+          this._onEventTapped(this.props.events[event.index])
           }
           key={i} style={[styles.event, style, event.color && eventColor, this.props.headerStyle.event]}
-        >
+          >
           {this.props.renderEvent ? (
             this.props.renderEvent(event)
-          ) : (
-            <View>
+            ) : (
+              <View>
               <Text numberOfLines={1} style={[styles.eventTitle, {color: this.props.colorProps.text}]}>
                 {event.title || 'Event'}
               </Text>
               {numberOfLines > 1 ? (
                 <Text
-                  numberOfLines={numberOfLines - 1}
-                  style={[styles.eventSummary, {color: this.props.colorProps.text}]}
+                numberOfLines={numberOfLines - 1}
+                style={[styles.eventSummary, {color: this.props.colorProps.text}]}
                 >
                   {event.summary || ' '}
                 </Text>
@@ -199,26 +199,25 @@ export default class DayView extends React.PureComponent {
         </TouchableOpacity>
       );
     });
-
     return (
       <View>
         <View style={{ marginLeft: LEFT_MARGIN }}>{events}</View>
       </View>
     );
   }
-
   render() {
+    console.log(this.props.noEventsRender)
     const { styles } = this.props;
     return (
-      <ScrollView
+      <ScrollView style={{backgroundColor: this.props.colorProps.backgroundColor}}
         refreshControl={
           <RefreshControl
-            size='large'
-            colors={[this.props.colorProps.text]}
-            progressBackgroundColor={this.props.colorProps.firstColor}
-            refreshing={this.props.refreshingForDayView} 
-            onRefresh={this.props.onRefreshForDayView} 
-        />}
+              size='large'
+              colors={[this.props.colorProps.text]}
+              progressBackgroundColor={this.props.colorProps.secondColor}
+              refreshing={this.props.refreshingForDayView} 
+              onRefresh={this.props.onRefreshForDayView} 
+          />}
         ref={ref => (this._scrollView = ref)}
         contentContainerStyle={[
           styles.contentStyle,
@@ -227,9 +226,12 @@ export default class DayView extends React.PureComponent {
           { width: this.props.width },
         ]}
       >
-        {this._renderLines()}
-        {this._renderEvents()}
-        {this._renderRedLine()}
+        {
+          this.state.packedEvents.length === 0
+          ? this.props.noEventsRender
+          : 
+            [this._renderLines(), this._renderEvents(), this._renderRedLine()]
+        }
       </ScrollView>
     );
   }
