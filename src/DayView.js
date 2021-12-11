@@ -205,6 +205,17 @@ export default class DayView extends React.PureComponent {
       </View>
     );
   }
+
+  _returnRenders() {
+    return (
+      <View>
+        {this._renderLines()}
+        {this._renderEvents()}
+        {this._renderRedLine()}
+      </View>
+    );
+  }
+  
   render() {
     const { styles } = this.props;
     return (
@@ -229,7 +240,7 @@ export default class DayView extends React.PureComponent {
           this.state.packedEvents.length === 0
           ? this.props.noEventsRender
           : 
-            [this._renderLines(), this._renderEvents(), this._renderRedLine()]
+            this._returnRenders()
         }
       </ScrollView>
     );
