@@ -212,7 +212,9 @@ export default class DayView extends React.PureComponent {
     return (
       <ScrollView
         refreshControl={
-          <RefreshControl 
+          <RefreshControl
+            colors={[this.props.colorProps.text]}
+            progressBackgroundColor={this.props.colorProps.firstColor}
             refreshing={this.props.refreshingForDayView} 
             onRefresh={this.props.onRefreshForDayView} 
         />}
